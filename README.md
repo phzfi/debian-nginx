@@ -40,9 +40,19 @@ Security: Update security updates regularly
 
 ### 3.1. Prerequisites
 
+For PHP usage (e.g. with Wordpress or any other), PHZ debian-nginx image has default configuration to connect to
+
+   fpm:9000
+
+which means that the downstream boxes should be named as "fpm", unless the configuration is overriden.
+
 ### 3.2. Start the Application
 
 ### 3.3. Access the Application
+
+    docker exec -it web bash
+
+    http://localhost:80
 
 ### 3.4. Run Tests
 
@@ -79,9 +89,7 @@ Security: Update security updates regularly
 ### 5.2. Deployment
 
 Run
-```
-./docker/build.sh prod <version> <docker_hub_username> <docker_hub_password>
-```
+    ./docker/build.sh prod <version> <docker_hub_username> <docker_hub_password>
 
 ### 5.3. Smoke Tests
 
