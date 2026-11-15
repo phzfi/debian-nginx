@@ -67,12 +67,12 @@ server {
     location = /healthz {
         access_log off; # Prevents logs from filling up with Kubernetes probes
         return 200 "healthy\n";
-        add_type text/plain;
+        default_type text/plain;
     }
     location = /readyz {
         access_log off; # Prevents logs from filling up with Kubernetes probes
         return 200 "ready\n";
-        add_type text/plain;
+        default_type text/plain;
     }
 
     #Security settings
