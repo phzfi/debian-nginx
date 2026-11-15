@@ -41,7 +41,8 @@ server {
 	root /var/www/html;
 
 	# Add index.php to the list if you are using PHP
-	index index.html index.htm index.php;
+	index index.html index.htm;
+#	index index.html index.htm index.php;
 
 	server_name _;
 
@@ -53,14 +54,26 @@ server {
 
 	# pass PHP scripts to FastCGI server
 	#
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
+#	location ~ \.php$ {
+#		include snippets/fastcgi-php.conf;
 	#
 	#	# With php-fpm (or other unix sockets):
 	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
 	#	# With php-cgi (or other tcp sockets):
-		fastcgi_pass fpm:9000;
-	}
+#		fastcgi_pass fpm:9000;
+#	}
+
+    # Kubernetes Health Check Endpoint
+    location = /healthz {
+        access_log off; # Prevents logs from filling up with Kubernetes probes
+        return 200 "healthy\n";
+        add_type text/plain;
+    }
+    location = /readyz {
+        access_log off; # Prevents logs from filling up with Kubernetes probes
+        return 200 "ready\n";
+        add_type text/plain;
+    }
 
     #Security settings
     server_tokens off;
